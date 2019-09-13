@@ -1,0 +1,94 @@
+%% -*- latex -*-
+\newtoks\nicsroot\directlua{ tex.settoks("nicsroot", os.getenv("NICS_ROOT") or error("NICS_ROOT environment variable has to be set, use the Makefile")) }
+\input{\the\nicsroot /src/nics-cached.tex}
+\endofdump
+\input{\the\nicsroot /src/nics-noncached.tex}
+\hypersetup{
+  pdfauthor={Eva},
+  pdftitle={PewPew Labs},
+}
+\nicsgrid=0
+
+\begin{document}
+
+\section{Intro}
+
+\nicstitleslide{images/pewpewtetris}{PewPew}{Nilcons Labs, Sept. 14, 2019}
+
+\begin{slide}{Introduction}{}
+  \begin{nicscolumn}
+    \nicsitem{EuroPython 2019}
+    \nicsitem{2017, Radomir Dopieralski}
+    \nicsitem{standalone, pre-installed with software AND games}
+    \nicsitem{runs CircuitPython code}
+    \nicsitem{connect with micro-USB -> shows up as a hard disk}
+    \nicsitem{needs two AAA batteries, can't be powered from USB}
+    
+
+    \begin{nicsindent}
+      \nicsitem{\just
+        We can also have indentation forless important stuff inside another item.
+        Also note that this paragraph is justified and has the same length in each line.
+        This is pretty nice for long paragraphs, we have the same in books.
+      }
+    \end{nicsindent}
+  \end{nicscolumn}
+\end{slide}
+
+\begin{slide}{Links}{}
+  \begin{nicscolumn}
+    \nicsitem{Buy: https://makerfabs.com/pewpew-standalone.html}
+    \nicsitem{Official website, Library Reference: https://pewpew.readthedocs.io}
+    \nicsitem{Pewmulator: https://github.com/pewpew-game/pew-pygame}
+    \nicsitem{Get output from the serial console: https://learn.adafruit.com/welcome-to-circuitpython/advanced-serial-console-on-mac-and-linux}
+    \nicsitem{https://learn.adafruit.com/welcome-to-circuitpython/the-repl}
+    \nicsitem{https://github.com/adafruit/Adafruit_CircuitPython_Bundle/releases}
+    \nicsitem{https://codewith.mu}
+  \end{nicscolumn}
+\end{slide}
+
+
+\begin{slide}{Colors}{}
+  \begin{nicscolumn}
+    \nicsitem{\textcolor{FireBrick}{hello colors}}
+    \nicsitem{\textcolor{Coral}{you are all beautiful}}
+    \nicsitem{\textcolor{ForestGreen}{yes, all of you}}
+
+    \nicsitem{\SMALL\url{https://developer.mozilla.org/en-US/docs/Web/CSS/color_value\#Color_keywords}}
+    \nicsitem{\href{http://www.yellowbearjourneys.com/color_themes/color_closest.html}{\Small \bold{www.yellowbearjourneys.com/color_themes/color_closest.html}}}
+
+    \definecolor{customgreen}{HTML}{00D200}
+    \nicsitem{\textcolor{customgreen}{It's ok to use custom colornames}}
+
+    \nicsitem{We have a special style for cmdline: \nicscmdline{$ ls -l}}
+  \end{nicscolumn}
+\end{slide}
+
+\nicsgrid=1
+
+\begin{slide}{Font sizes}{}
+  \begin{nicscolumn*}{5cm}{0cm}{10cm}
+    \def\example#1{#1\nicsitem{\string#1}}
+    \example{\TINY}
+    \example{\Tiny}
+    \example{\tiny}
+    \example{\SMALL}
+    \example{\Small}
+    \example{\small}
+    \example{\normalsize}
+    \example{\large}
+    \example{\Large}
+    \example{\LARGE}
+    \example{\huge}
+    \example{\Huge}
+    \example{\HUGE}
+  \end{nicscolumn*}
+\end{slide}
+
+
+
+\section{Externalization}
+
+
+
+\end{document}

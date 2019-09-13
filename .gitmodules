@@ -1,0 +1,3 @@
+[submodule "presentation/nics"]
+	path = presentation/nics
+	url = git://github.com/nilcons/nics
