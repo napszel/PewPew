@@ -11,84 +11,199 @@
 
 \begin{document}
 
-\section{Intro}
+\section{Pre-p(l)ay}
 
 \nicstitleslide{images/pewpewtetris}{PewPew}{Nilcons Labs, Sept. 14, 2019}
 
-\begin{slide}{Introduction}{}
+\begin{slide}{Before we even begin...}{LET'S TRY IT!}
   \begin{nicscolumn}
-    \nicsitem{EuroPython 2019}
-    \nicsitem{2017, Radomir Dopieralski}
-    \nicsitem{standalone, pre-installed with software AND games}
-    \nicsitem{runs CircuitPython code}
-    \nicsitem{connect with micro-USB -> shows up as a hard disk}
-    \nicsitem{needs two AAA batteries, can't be powered from USB}
-    
-
-    \begin{nicsindent}
-      \nicsitem{\just
-        We can also have indentation forless important stuff inside another item.
-        Also note that this paragraph is justified and has the same length in each line.
-        This is pretty nice for long paragraphs, we have the same in books.
-      }
-    \end{nicsindent}
+    \nicspar{1) Turn it on with the tiny slider switch on the top.}
+    \nicspar{2) Read the text and be amazed.}
+    \nicspar{3) Plug it in with the micro USB cable to your computer.}
+    \nicspar{\nicsleadword{4)}Wait for it to show up as a drive called \textcolor{ForestGreen}{CIRCUITPY}. (If you are on a Linux where it doesn't mount automatically, I'm sure you know how to mount it.)}
+    \nicspar{\nicsleadword{5)} On the drive, look for the file called 'Europython 2019.py' and rename it to something else.}
+    \nicspar{6) See the device automatically reload and show something else...}
+    \nicspar{7) Use the buttons and figure out how to play.}
   \end{nicscolumn}
 \end{slide}
+
+\begin{slide}{Can you answer this?}{First}
+  \begin{nicscolumn}
+    \nicsitem{The file names from the drive are listed in the menu. How are they ordered?}
+    \nicsitem{Can you find in which file and where this order is specified?}
+  \end{nicscolumn}
+\end{slide}
+
+\begin{slide}{Can you answer this?}{Second}
+  \begin{nicscolumn}
+    \nicsitem{Where did the initially scrolling text \textcolor{ForestGreen}{EuroPython 2019} came from? Can you find it in the code?}
+    \nicsitem{Search, grep and visual recognition system all allowed on the mounted drive...}
+    \nicsitem{...or on my GitHub repo. These are the files on your PewPew, I promise: {\href{https://github.com/napszel/PewPew/tree/master/original_files}{{https://github.com/napszel/PewPew/tree/master/original_files}}}}
+  \end{nicscolumn}
+\end{slide}
+  
+\begin{slide}{Can you answer this?}{Third}
+  \begin{nicscolumn}
+    \nicsitem{So it came from the file name? Then why didn't the new file name started scrolling after rename?}
+  \end{nicscolumn}
+\end{slide}
+
+
+\section{Introduction}
+
+\begin{slide}{Introduction}{PewPew for everyone}
+  \begin{nicscolumn}
+    \nicsitem{EuroPython 2019, every participant gets one}
+    \nicsitem{Special made, unique design and hardware for the event}
+    \nicsitem{PewPew 10.2 - 2017, Radomir Dopieralski}
+    \nicsitem{Main goals of the design:}
+    \begin{nicsindent}
+      \nicsitem{cheap}
+      \nicsitem{simple}
+      \nicsitem{for kids}
+      \nicsitem{for game programming}
+    \end{nicsindent}
+    \nicsitem{standalone, hand-held}
+    \nicsitem{pre-installed with software AND games}
+    \nicsitem{needs no additinal software or hardware (just AAA batteries)}
+  \end{nicscolumn}
+\end{slide}
+
+\begin{slide}{Hardware}{[]}
+  \begin{nicscolumn}
+    \nicsitem{USB port - can NOT be powered from it}
+    \nicsitem{Two AAA batteries - fries if you put them in the wrong way}
+    \nicsitem{64 led screen - 8*8 blue leds; made of plastic}
+    \nicsitem{Only one color but 3 brightnesses for each}
+    \nicsitem{6 buttons - differentiated if you press some together}
+    \nicsitem{Does not have sound}
+    \nicsitem{RAM? Yes. (See later)}
+    \nicsitem{12-pin connector interface - GPIO pins - connect electronics such as neopixels, a speaker, sensors, etc.}
+    \nicsitem{Atmel SAMD21 Controller}
+  \end{nicscolumn}
+\end{slide}
+
+\begin{slide}{Software}{()}
+  \begin{nicscolumn}
+    \nicsitem{Includes the CircuitPython interpreter (Python for microcontrollers)}
+    \nicsitem{Absolutely no additional software needed to be installed on the device or the computer}
+    \nicsitem{Same as on Adafruit devices -> the drivers for connected electronics should work}
+    \nicsitem{Comes with menu system \textcolor{ForestGreen}{main.py}. Scrolls the file names and lets you select and run them.}
+    \nicsitem{Actually, it searches for code.txt, code.py, main.txt, main.py in this order and it runs the first that it finds.}
+    \nicsitem{If the file is edited and saved, it automatically re-runs the code.}
+  \end{nicscolumn}
+\end{slide}
+
+\begin{slide}{Development}{Intended development process}
+  \begin{nicscolumn}
+    \nicspar{1) You don't touch the \textcolor{ForestGreen}{main.py}}
+    \nicspar{2) Instead, create a \textcolor{ForestGreen}{code.py}}
+    \nicspar{3) Develop your game in there}
+    \nicspar{4) Enjoy the automatic re-start process at each save}
+    \nicspar{5) After done, give it a proper name}
+    \nicspar{6) The main.py's menu system will pick it up}
+    \nicspar{7) Run your game from the menu from now on}
+  \end{nicscolumn}
+\end{slide}
+
+\section{Lab 2}
+
+\begin{slide}{Let's write some code}{Hello Pixel!}
+  \begin{nicscolumn}
+    \nicspar{\nicsleadword{1)} On the CIRCUITPY drive, create a file called \textcolor{ForestGreen}{code.py} and open it with your favorite text editor. Write some code to light a pixel:}
+    \nicsexterncode{python}
+    \begin{nicsextern}[height=2.5cm]{}
+    import pew
+    pew.init()
+    screen = pew.Pix()
+    screen.pixel(3, 3, 2) # x=3, y=3, brightness=2
+    pew.show(screen)
+    \end{nicsextern}
+    \nicspar{2) Add a \nicscmdline{while True:} before \nicscmdline{pew.show(screen)} so the pixel stays lit.}
+    \nicspar{Quick questions: a) Are the display coordinates zero indexed? b) What are the valid brightness numbers? c) What happens if you give a too high brightness? d) What happens if you leave a syntax error in your program?}
+  \end{nicscolumn}
+\end{slide}
+
+\section{Serial - REPL}
+
+\begin{slide}{Let's get seri(al)ous}{Connect to the serial console}
+  \begin{nicscolumn}
+    \nicsitem{Output, like print messages and errors are sent to the serial console over USB}
+    \nicsitem{Connect to the serial console:\href{https://learn.adafruit.com/welcome-to-circuitpython/advanced-serial-console-on-mac-and-linux}{{https://learn.adafruit.com/welcome-to-circuitpython/advanced-serial-console-on-mac-and-linux}}}
+    \nicsitem{Something like: Linux \nicscmdline{screen /dev/ttyACM0 115200}. Mac: \nicscmdline{screen /dev/cu.usbmodem142101 115200}.}
+    \nicsitem{After connected: Add a \nicscmdline{print(''Hello World!'')} to your code and see it print.}
+    \nicsitem{Then try a syntax error and see what happens.}
+  \end{nicscolumn}
+\end{slide}
+
+\begin{slide}{REPL}{Read Evaluate Print Loop}
+  \begin{nicscolumn}
+    \nicsitem{If the running program ends in error or you interrupt it with Ctrl+C -> you end up in a REPL console}
+    \nicsitem{Interactive Python console to try commands instantly.}
+    \nicsitem{Try these:}
+    \nicspar{   \nicscmdline{help()}}
+    \nicspar{   \nicscmdline{help(''modules'')} -> list modules}
+    \nicspar{   \nicscmdline{import board}}
+    \nicspar{   \nicscmdline{dir(board)} -> list available pins}
+    \nicspar{   \nicscmdline{import gc}}
+    \nicspar{   \nicscmdline{gc.mem_free()} -> available memory in BYTES}
+    \nicsitem{Ctrl+D to continue execution}
+    \nicsitem{Ctrl+A k to exit}
+  \end{nicscolumn}
+\end{slide}
+
+
+\section{Memory}
+
+\begin{slide}{Memory}{I don't know how much but not much}
+  \begin{nicscolumn}
+    \nicsitem{What to do if not enough?}
+    \nicsitem{You will get a 'MemoryError'}
+    \nicsitem{Reset the board -> it reallocates memory}
+    \nicsitem{Use the .mpy version of libs instead of the .py ones}
+    \nicsitem{Shorten your code: no comments, move functions to .mpy libs}
+    \nicsitem{The order of lib imports might matter too!}
+    \nicsitem{Interestingly: re-coping all the original files to the device failed.}
+  \end{nicscolumn}
+\end{slide}
+
+
+\section{MU}
+
+\begin{slide}{MU}{The recommended editor for beginners}
+  \begin{nicscolumn}
+    \nicsitem{Simple, user and kid friendly UI with minimal features}
+    \nicsitem{Connects to the board: Adafruit's dev board and BCC micro:bit, Pygame Zero. Or just runs python 3 code.}
+    \nicsitem{Shows the serial console output built in.}
+    \nicsitem{Works on Mac, Linux, Win and RaspberryPi.}
+    \nicsitem{Has syntax check, warnings and helps messages.}
+  \end{nicscolumn}
+\end{slide}
+
+
+\section{Outro}
+
+\begin{slide}{Implementation ideas}{}
+  \begin{nicscolumn}
+    \nicsitem{No colors and only 3 brightnesses? How about the main character blinking? -> sokoban.py}
+    \nicsitem{Higher color numbers give option to smart pixel type calculations. -> sokoban.py}
+    \nicsitem{To prevent double move on one click use pressing=False logic. -> draw.py}
+    \nicsitem{Break from top level while True to stop the exection and go back to the menu.}
+  \end{nicscolumn}
+\end{slide}
+
+\section{Help}
 
 \begin{slide}{Links}{}
   \begin{nicscolumn}
     \nicsitem{Buy: https://makerfabs.com/pewpew-standalone.html}
     \nicsitem{Official website, Library Reference: https://pewpew.readthedocs.io}
     \nicsitem{Pewmulator: https://github.com/pewpew-game/pew-pygame}
-    \nicsitem{Get output from the serial console: https://learn.adafruit.com/welcome-to-circuitpython/advanced-serial-console-on-mac-and-linux}
-    \nicsitem{https://learn.adafruit.com/welcome-to-circuitpython/the-repl}
-    \nicsitem{https://github.com/adafruit/Adafruit_CircuitPython_Bundle/releases}
-    \nicsitem{https://codewith.mu}
+    \nicsitem{Connect to the serial console: https://learn.adafruit.com/welcome-to-circuitpython/advanced-serial-console-on-mac-and-linux}
+    \nicsitem{REPL: https://learn.adafruit.com/welcome-to-circuitpython/the-repl}
+    \nicsitem{CircuitPython bundle: https://github.com/adafruit/Adafruit_CircuitPython_Bundle/releases}
+    \nicsitem{Mu editor: https://codewith.mu}
   \end{nicscolumn}
 \end{slide}
-
-
-\begin{slide}{Colors}{}
-  \begin{nicscolumn}
-    \nicsitem{\textcolor{FireBrick}{hello colors}}
-    \nicsitem{\textcolor{Coral}{you are all beautiful}}
-    \nicsitem{\textcolor{ForestGreen}{yes, all of you}}
-
-    \nicsitem{\SMALL\url{https://developer.mozilla.org/en-US/docs/Web/CSS/color_value\#Color_keywords}}
-    \nicsitem{\href{http://www.yellowbearjourneys.com/color_themes/color_closest.html}{\Small \bold{www.yellowbearjourneys.com/color_themes/color_closest.html}}}
-
-    \definecolor{customgreen}{HTML}{00D200}
-    \nicsitem{\textcolor{customgreen}{It's ok to use custom colornames}}
-
-    \nicsitem{We have a special style for cmdline: \nicscmdline{$ ls -l}}
-  \end{nicscolumn}
-\end{slide}
-
-\nicsgrid=1
-
-\begin{slide}{Font sizes}{}
-  \begin{nicscolumn*}{5cm}{0cm}{10cm}
-    \def\example#1{#1\nicsitem{\string#1}}
-    \example{\TINY}
-    \example{\Tiny}
-    \example{\tiny}
-    \example{\SMALL}
-    \example{\Small}
-    \example{\small}
-    \example{\normalsize}
-    \example{\large}
-    \example{\Large}
-    \example{\LARGE}
-    \example{\huge}
-    \example{\Huge}
-    \example{\HUGE}
-  \end{nicscolumn*}
-\end{slide}
-
-
-
-\section{Externalization}
-
-
 
 \end{document}
